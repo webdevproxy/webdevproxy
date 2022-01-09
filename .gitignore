@@ -1,0 +1,5 @@
+# stick any temp files here
+ignored-files/
+
+# in case main is built
+main
