@@ -24,7 +24,7 @@ func parseAndSetupProxies(hostsFilePath string) {
 	setupProxies(NewHostsFile(hostsFilePath))
 }
 
-func setupProxies(hostsfile *Hostfile) {
+func setupProxies(hostsfile *Hostsfile) {
 	haveExistingProxies := proxies != nil
 	proxies = make(map[string]*httputil.ReverseProxy)
 

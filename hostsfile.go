@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-type HostFileEntry struct {
+type HostsFileEntry struct {
 	LineNumber    int
 	Ip            string
 	Hostname      string
@@ -20,25 +20,25 @@ type HostFileEntry struct {
 	ProxyHostname string
 }
 
-type HostFileSyntaxError struct {
+type HostsFileSyntaxError struct {
 	LineNumber  int
 	Line        string
 	SyntaxError string
 }
 
-type Hostfile struct {
+type Hostsfile struct {
 	Path         string
 	Contents     string
-	Entries      []HostFileEntry
-	SyntaxErrors []HostFileSyntaxError
+	Entries      []HostsFileEntry
+	SyntaxErrors []HostsFileSyntaxError
 }
 
-func (h *HostFileEntry) proxyUrl() *url.URL {
+func (h *HostsFileEntry) proxyUrl() *url.URL {
 	url, _ := url.Parse(fmt.Sprintf("http://%s:%d/", h.ProxyHost, h.ProxyPort))
 	return url
 }
 
-func NewHostsFile(path string) *Hostfile {
+func NewHostsFile(path string) *Hostsfile {
 	contents, err := ioutil.ReadFile(path)
 	if err != nil {
 		contents = make([]byte, 0)
@@ -46,13 +46,13 @@ func NewHostsFile(path string) *Hostfile {
 
 	entries, syntaxErrors := ParseHostsFile(contents)
 
-	hostsfile := Hostfile{Path: path, Contents: string(contents), Entries: entries, SyntaxErrors: syntaxErrors}
+	hostsfile := Hostsfile{Path: path, Contents: string(contents), Entries: entries, SyntaxErrors: syntaxErrors}
 	return &hostsfile
 }
 
-func ParseHostsFile(contents []byte) ([]HostFileEntry, []HostFileSyntaxError) {
-	entries := make([]HostFileEntry, 0)
-	syntaxErrors := make([]HostFileSyntaxError, 0)
+func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) {
+	entries := make([]HostsFileEntry, 0)
+	syntaxErrors := make([]HostsFileSyntaxError, 0)
 	proxyComment := regexp.MustCompile("^\\s*webdevproxy(.*)$")
 
 	lines := strings.Split(strings.Trim(string(contents), " \t\r\n"), "\n")
@@ -67,14 +67,14 @@ func ParseHostsFile(contents []byte) ([]HostFileEntry, []HostFileSyntaxError) {
 
 		lineParts := strings.SplitN(line, " ", 2)
 		if len(lineParts) > 1 && len(lineParts[0]) > 0 {
-			lineEntries := make([]HostFileEntry, 0)
+			lineEntries := make([]HostsFileEntry, 0)
 
 			// parse the text before any comment in form (ip hostname*)
 			ip := lineParts[0]
 			valueParts := strings.SplitN(lineParts[1], "#", 2)
 			if hostnames := strings.Fields(valueParts[0]); len(hostnames) > 0 {
 				for _, hostname := range hostnames {
-					lineEntries = append(lineEntries, HostFileEntry{LineNumber: lineNumber, Ip: ip, Hostname: hostname})
+					lineEntries = append(lineEntries, HostsFileEntry{LineNumber: lineNumber, Ip: ip, Hostname: hostname})
 				}
 			}
 
@@ -97,7 +97,7 @@ func ParseHostsFile(contents []byte) ([]HostFileEntry, []HostFileSyntaxError) {
 								case name == "to":
 									proxyPort, proxyHost, err = ParseProxyPort(argParts[1])
 									if err != nil {
-										syntaxErrors = append(syntaxErrors, HostFileSyntaxError{
+										syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
 											LineNumber:  lineNumber,
 											Line:        line,
 											SyntaxError: err.Error(),
@@ -110,7 +110,7 @@ func ParseHostsFile(contents []byte) ([]HostFileEntry, []HostFileSyntaxError) {
 									proxyHostname = argParts[1]
 
 								default:
-									syntaxErrors = append(syntaxErrors, HostFileSyntaxError{
+									syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
 										LineNumber:  lineNumber,
 										Line:        line,
 										SyntaxError: fmt.Sprintf("Unknown key:value in the webdevproxy comment: %s", arg),
@@ -127,7 +127,7 @@ func ParseHostsFile(contents []byte) ([]HostFileEntry, []HostFileSyntaxError) {
 						for i := 0; i < len(lineEntries); i++ {
 							lineEntry := &lineEntries[i]
 							if lineEntry.Hostname == "localhost" {
-								syntaxErrors = append(syntaxErrors, HostFileSyntaxError{
+								syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
 									LineNumber:  lineNumber,
 									Line:        line,
 									SyntaxError: "A webdevproxy comment is not allowed for localhost",
@@ -144,7 +144,7 @@ func ParseHostsFile(contents []byte) ([]HostFileEntry, []HostFileSyntaxError) {
 							}
 						}
 					} else {
-						syntaxErrors = append(syntaxErrors, HostFileSyntaxError{
+						syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
 							LineNumber:  lineNumber,
 							Line:        line,
 							SyntaxError: "No port value given, use to:PORT in webdevproxy comment",
