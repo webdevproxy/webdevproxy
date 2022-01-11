@@ -20,6 +20,10 @@ var assets embed.FS
 
 var proxies map[string]*httputil.ReverseProxy
 
+func parseAndSetupProxies(hostsFilePath string) {
+	setupProxies(NewHostsFile(hostsFilePath))
+}
+
 func setupProxies(hostsfile *Hostfile) {
 	haveExistingProxies := proxies != nil
 	proxies = make(map[string]*httputil.ReverseProxy)

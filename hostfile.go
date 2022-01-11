@@ -38,16 +38,16 @@ func (h *HostFileEntry) proxyUrl() *url.URL {
 	return url
 }
 
-func NewHostsFile(path string) (*Hostfile, error) {
+func NewHostsFile(path string) *Hostfile {
 	contents, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, err
+		contents = make([]byte, 0)
 	}
 
 	entries, syntaxErrors := ParseHostsFile(contents)
 
 	hostsfile := Hostfile{Path: path, Contents: string(contents), Entries: entries, SyntaxErrors: syntaxErrors}
-	return &hostsfile, nil
+	return &hostsfile
 }
 
 func ParseHostsFile(contents []byte) ([]HostFileEntry, []HostFileSyntaxError) {
