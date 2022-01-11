@@ -48,7 +48,7 @@ func handleRedirect(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(502)
 		displayProxyError(w, r, &ProxyErrorTemplateData{
 			Title:     "Proxy Entry Not Found",
-			Message:   fmt.Sprintf("<p>Proxy entry not found for %s.</p>", r.Host),
+			Message:   fmt.Sprintf("<p>Proxy entry not found for <strong>%s</strong>.</p>", r.Host),
 			ErrorCode: "wdp1000",
 		})
 	}
