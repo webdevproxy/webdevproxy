@@ -25,10 +25,27 @@ var adminStaticHandler http.Handler
 
 func setupAdminServer() {
 	adminMux = http.NewServeMux()
-	adminMux.Handle("/", http.FileServer(http.FS(adminFS())))
+	adminMux.Handle("/", handleAdminFileServerRequest())
 	adminMux.HandleFunc("/ping", handleAdminServerPingRequest)
 	adminMux.HandleFunc("/api/watch-config", handleAdminServerWatchConfigRequest)
 	adminMux.HandleFunc("/__live_admin", handleAdminServerLiveAdminRequest)
+}
+
+func handleAdminFileServerRequest() http.Handler {
+	httpFs := http.FS(adminFS())
+	fileServer := http.FileServer(httpFs)
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		f, _ := httpFs.Open(r.URL.Path)
+		if f != nil {
+			f.Close()
+		} else {
+			// TODO: add regex to ignore root level paths with periods (favicon.ico, robots.txt, etc)
+			r.URL.Path = "/"
+		}
+
+		fileServer.ServeHTTP(w, r)
+	})
 }
 
 func handleAdminServerRequest(w http.ResponseWriter, r *http.Request) {

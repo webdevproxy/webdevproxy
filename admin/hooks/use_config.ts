@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 interface ProxyConfig {
 }
@@ -54,3 +54,22 @@ export const useConfig = () => {
   }, [])
   return { config, configError }
 }
+
+export const useHostsFileEntry = (host?: string) => {
+  const { config } = useConfig()
+  const [hostsFileEntry, setHostsFileEntry] = useState<HostsFileEntry | undefined>(undefined)
+
+  useEffect(() => {
+    if (config && host) {
+      setHostsFileEntry(config.hosts.entries.find(e => e.host === host))
+    } else {
+      setHostsFileEntry(undefined)
+    }
+  }, [config, host])
+
+  return hostsFileEntry
+}
+
+export const ConfigContext = createContext<Config | undefined>(undefined)
+
+export const useConfigContext = () => useContext(ConfigContext)

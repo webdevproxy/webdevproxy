@@ -1,8 +1,8 @@
 import * as React from "react"
+import { Link, Outlet } from "react-router-dom"
 
-import { useConfig } from "../hooks/use_config"
+import { ConfigContext, useConfig } from "../hooks/use_config"
 import { useLiveAdmin } from "../hooks/use_live_admin"
-import DashboardComponent from "./dashboard"
 
 const AppComponent = () => {
   useLiveAdmin()
@@ -13,10 +13,13 @@ const AppComponent = () => {
   }
 
   return (
-    <>
+    <ConfigContext.Provider value={config}>
       {configError && <div className="error">{configError}</div>}
-      <DashboardComponent config={config} />
-    </>
+      <p>
+        <Link to="/">Dashboard</Link> | <Link to="/hosts">All Hosts</Link>
+      </p>
+      <Outlet />
+    </ConfigContext.Provider>
   )
 }
 

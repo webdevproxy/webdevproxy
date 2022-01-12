@@ -52,6 +52,7 @@ func NewHostsFile(path string) *Hostsfile {
 }
 
 func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) {
+	existingHosts := make(map[string]bool)
 	entries := make([]HostsFileEntry, 0)
 	syntaxErrors := make([]HostsFileSyntaxError, 0)
 	proxyComment := regexp.MustCompile("^\\s*webdevproxy(.*)$")
@@ -76,13 +77,22 @@ func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) 
 			if hosts := strings.Fields(valueParts[0]); len(hosts) > 0 {
 				for _, host := range hosts {
 					if host != "localhost" {
-						lineEntries = append(lineEntries, HostsFileEntry{LineNumber: lineNumber, LineContent: lineContent, Ip: ip, Host: host})
+						if existingHosts[host] {
+							syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
+								LineNumber:  lineNumber,
+								LineContent: lineContent,
+								SyntaxError: "Duplicate hostname",
+							})
+						} else {
+							lineEntries = append(lineEntries, HostsFileEntry{LineNumber: lineNumber, LineContent: lineContent, Ip: ip, Host: host})
+							existingHosts[host] = true
+						}
 					}
 				}
 			}
 
 			// parse the comment(s)
-			if len(valueParts) > 1 {
+			if len(lineEntries) > 0 && len(valueParts) > 1 {
 				var proxied bool
 				var proxyPort int
 				var proxyHost string

@@ -498,7 +498,7 @@
             }
             return element;
           };
-          function createElement4(type, config, children) {
+          function createElement8(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -610,7 +610,7 @@
             }
             return ReactElement(element.type, key, ref, self, source, owner, props);
           }
-          function isValidElement(object) {
+          function isValidElement2(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
           var SEPARATOR = ".";
@@ -672,7 +672,7 @@
                   return c;
                 });
               } else if (mappedChild != null) {
-                if (isValidElement(mappedChild)) {
+                if (isValidElement2(mappedChild)) {
                   mappedChild = cloneAndReplaceKey(mappedChild, escapedPrefix + (mappedChild.key && (!_child || _child.key !== mappedChild.key) ? escapeUserProvidedKey("" + mappedChild.key) + "/" : "") + childKey);
                 }
                 array.push(mappedChild);
@@ -749,14 +749,14 @@
             }) || [];
           }
           function onlyChild(children) {
-            if (!isValidElement(children)) {
+            if (!isValidElement2(children)) {
               {
                 throw Error("React.Children.only expected to receive a single React element child.");
               }
             }
             return children;
           }
-          function createContext(defaultValue, calculateChangedBits) {
+          function createContext3(defaultValue, calculateChangedBits) {
             if (calculateChangedBits === void 0) {
               calculateChangedBits = null;
             } else {
@@ -935,7 +935,7 @@
             }
             return lazyType;
           }
-          function forwardRef(render2) {
+          function forwardRef2(render2) {
             {
               if (render2 != null && render2.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1027,7 +1027,7 @@
             }
             return dispatcher;
           }
-          function useContext(Context, unstable_observedBits) {
+          function useContext3(Context, unstable_observedBits) {
             var dispatcher = resolveDispatcher();
             {
               if (unstable_observedBits !== void 0) {
@@ -1044,7 +1044,7 @@
             }
             return dispatcher.useContext(Context, unstable_observedBits);
           }
-          function useState2(initialState) {
+          function useState4(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1052,23 +1052,23 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef(initialValue) {
+          function useRef3(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect3(create, deps) {
+          function useEffect4(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
-          function useLayoutEffect(create, deps) {
+          function useLayoutEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback(callback, deps) {
+          function useCallback3(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo(create, deps) {
+          function useMemo3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1449,11 +1449,11 @@
             if (Array.isArray(node)) {
               for (var i = 0; i < node.length; i++) {
                 var child = node[i];
-                if (isValidElement(child)) {
+                if (isValidElement2(child)) {
                   validateExplicitKey(child, parentType);
                 }
               }
-            } else if (isValidElement(node)) {
+            } else if (isValidElement2(node)) {
               if (node._store) {
                 node._store.validated = true;
               }
@@ -1464,7 +1464,7 @@
                   var iterator = iteratorFn.call(node);
                   var step;
                   while (!(step = iterator.next()).done) {
-                    if (isValidElement(step.value)) {
+                    if (isValidElement2(step.value)) {
                       validateExplicitKey(step.value, parentType);
                     }
                   }
@@ -1546,7 +1546,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement4.apply(this, arguments);
+            var element = createElement8.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1603,36 +1603,36 @@
           var createElement$1 = createElementWithValidation;
           var cloneElement$1 = cloneElementWithValidation;
           var createFactory = createFactoryWithValidation;
-          var Children = {
+          var Children2 = {
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
             toArray,
             only: onlyChild
           };
-          exports.Children = Children;
+          exports.Children = Children2;
           exports.Component = Component;
           exports.PureComponent = PureComponent;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
-          exports.createContext = createContext;
+          exports.createContext = createContext3;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef;
-          exports.isValidElement = isValidElement;
+          exports.forwardRef = forwardRef2;
+          exports.isValidElement = isValidElement2;
           exports.lazy = lazy;
           exports.memo = memo;
-          exports.useCallback = useCallback;
-          exports.useContext = useContext;
+          exports.useCallback = useCallback3;
+          exports.useContext = useContext3;
           exports.useDebugValue = useDebugValue;
-          exports.useEffect = useEffect3;
+          exports.useEffect = useEffect4;
           exports.useImperativeHandle = useImperativeHandle;
-          exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo;
+          exports.useLayoutEffect = useLayoutEffect3;
+          exports.useMemo = useMemo3;
           exports.useReducer = useReducer;
-          exports.useRef = useRef;
-          exports.useState = useState2;
+          exports.useRef = useRef3;
+          exports.useState = useState4;
           exports.version = ReactVersion;
         })();
       }
@@ -2440,11 +2440,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React4 = require_react();
+          var React6 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React4.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React6.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2476,7 +2476,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React4) {
+          if (!React6) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -2486,9 +2486,9 @@
           var IndeterminateComponent = 2;
           var HostRoot = 3;
           var HostPortal = 4;
-          var HostComponent = 5;
+          var HostComponent2 = 5;
           var HostText = 6;
-          var Fragment3 = 7;
+          var Fragment4 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -3260,7 +3260,7 @@
             var owner = fiber._debugOwner ? fiber._debugOwner.type : null;
             var source = fiber._debugSource;
             switch (fiber.tag) {
-              case HostComponent:
+              case HostComponent2:
                 return describeBuiltInComponentFrame(fiber.type);
               case LazyComponent:
                 return describeBuiltInComponentFrame("Lazy");
@@ -3692,7 +3692,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React4.Children.forEach(children, function(child) {
+            React6.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3703,7 +3703,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React4.Children.forEach(props.children, function(child) {
+                React6.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -5624,7 +5624,7 @@
             }
             var node = currentParent;
             while (true) {
-              if (node.tag === HostComponent || node.tag === HostText) {
+              if (node.tag === HostComponent2 || node.tag === HostText) {
                 return node;
               } else if (node.child) {
                 node.child.return = node;
@@ -5652,7 +5652,7 @@
             }
             var node = currentParent;
             while (true) {
-              if (node.tag === HostComponent || node.tag === HostText || enableFundamentalAPI) {
+              if (node.tag === HostComponent2 || node.tag === HostText || enableFundamentalAPI) {
                 return node;
               } else if (node.child && node.tag !== HostPortal) {
                 node.child.return = node;
@@ -7492,7 +7492,7 @@
               to = _related ? getClosestInstanceFromNode(_related) : null;
               if (to !== null) {
                 var nearestMounted = getNearestMountedFiber(to);
-                if (to !== nearestMounted || to.tag !== HostComponent && to.tag !== HostText) {
+                if (to !== nearestMounted || to.tag !== HostComponent2 && to.tag !== HostText) {
                   to = null;
                 }
               }
@@ -8147,7 +8147,7 @@
                           return;
                         }
                         var parentTag = parentNode.tag;
-                        if (parentTag === HostComponent || parentTag === HostText) {
+                        if (parentTag === HostComponent2 || parentTag === HostText) {
                           node = ancestorInst = parentNode;
                           continue mainLoop;
                         }
@@ -8177,7 +8177,7 @@
             var lastHostComponent = null;
             while (instance !== null) {
               var _instance2 = instance, stateNode = _instance2.stateNode, tag = _instance2.tag;
-              if (tag === HostComponent && stateNode !== null) {
+              if (tag === HostComponent2 && stateNode !== null) {
                 lastHostComponent = stateNode;
                 if (reactEventName !== null) {
                   var listener = getListener(instance, reactEventName);
@@ -8199,7 +8199,7 @@
             var instance = targetFiber;
             while (instance !== null) {
               var _instance3 = instance, stateNode = _instance3.stateNode, tag = _instance3.tag;
-              if (tag === HostComponent && stateNode !== null) {
+              if (tag === HostComponent2 && stateNode !== null) {
                 var currentTarget = stateNode;
                 var captureListener = getListener(instance, captureName);
                 if (captureListener != null) {
@@ -8220,7 +8220,7 @@
             }
             do {
               inst = inst.return;
-            } while (inst && inst.tag !== HostComponent);
+            } while (inst && inst.tag !== HostComponent2);
             if (inst) {
               return inst;
             }
@@ -8267,7 +8267,7 @@
               if (alternate !== null && alternate === common) {
                 break;
               }
-              if (tag === HostComponent && stateNode !== null) {
+              if (tag === HostComponent2 && stateNode !== null) {
                 var currentTarget = stateNode;
                 if (inCapturePhase) {
                   var captureListener = getListener(instance, registrationName);
@@ -8457,7 +8457,7 @@
               }
             }
           }
-          function createElement4(type, props, rootContainerElement, parentNamespace) {
+          function createElement8(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -9334,7 +9334,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement8(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -9680,7 +9680,7 @@
           function getInstanceFromNode(node) {
             var inst = node[internalInstanceKey] || node[internalContainerInstanceKey];
             if (inst) {
-              if (inst.tag === HostComponent || inst.tag === HostText || inst.tag === SuspenseComponent || inst.tag === HostRoot) {
+              if (inst.tag === HostComponent2 || inst.tag === HostText || inst.tag === SuspenseComponent || inst.tag === HostRoot) {
                 return inst;
               } else {
                 return null;
@@ -9689,7 +9689,7 @@
             return null;
           }
           function getNodeFromInstance(inst) {
-            if (inst.tag === HostComponent || inst.tag === HostText) {
+            if (inst.tag === HostComponent2 || inst.tag === HostText) {
               return inst.stateNode;
             }
             {
@@ -10896,7 +10896,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React4.Component().refs;
+          var emptyRefsObject = new React6.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -11672,7 +11672,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment3) {
+              if (current2 === null || current2.tag !== Fragment4) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -12040,7 +12040,7 @@
               while (child !== null) {
                 if (child.key === key) {
                   switch (child.tag) {
-                    case Fragment3: {
+                    case Fragment4: {
                       if (element.type === REACT_FRAGMENT_TYPE) {
                         deleteRemainingChildren(returnFiber, child.sibling);
                         var existing = useFiber(child, element.props.children);
@@ -12344,7 +12344,7 @@
                 case HostRoot:
                   didNotHydrateContainerInstance(returnFiber.stateNode.containerInfo, instance);
                   break;
-                case HostComponent:
+                case HostComponent2:
                   didNotHydrateInstance(returnFiber.type, returnFiber.memoizedProps, returnFiber.stateNode, instance);
                   break;
               }
@@ -12367,7 +12367,7 @@
                 case HostRoot: {
                   var parentContainer = returnFiber.stateNode.containerInfo;
                   switch (fiber.tag) {
-                    case HostComponent:
+                    case HostComponent2:
                       var type = fiber.type;
                       var props = fiber.pendingProps;
                       didNotFindHydratableContainerInstance(parentContainer, type);
@@ -12379,12 +12379,12 @@
                   }
                   break;
                 }
-                case HostComponent: {
+                case HostComponent2: {
                   var parentType = returnFiber.type;
                   var parentProps = returnFiber.memoizedProps;
                   var parentInstance = returnFiber.stateNode;
                   switch (fiber.tag) {
-                    case HostComponent:
+                    case HostComponent2:
                       var _type = fiber.type;
                       var _props = fiber.pendingProps;
                       didNotFindHydratableInstance(parentType, parentProps, parentInstance, _type);
@@ -12406,7 +12406,7 @@
           }
           function tryHydrate(fiber, nextInstance) {
             switch (fiber.tag) {
-              case HostComponent: {
+              case HostComponent2: {
                 var type = fiber.type;
                 var props = fiber.pendingProps;
                 var instance = canHydrateInstance(nextInstance, type);
@@ -12480,7 +12480,7 @@
                       didNotMatchHydratedContainerTextInstance(parentContainer, textInstance, textContent);
                       break;
                     }
-                    case HostComponent: {
+                    case HostComponent2: {
                       var parentType = returnFiber.type;
                       var parentProps = returnFiber.memoizedProps;
                       var parentInstance = returnFiber.stateNode;
@@ -12505,7 +12505,7 @@
           }
           function popToNextHostParent(fiber) {
             var parent = fiber.return;
-            while (parent !== null && parent.tag !== HostComponent && parent.tag !== HostRoot && parent.tag !== SuspenseComponent) {
+            while (parent !== null && parent.tag !== HostComponent2 && parent.tag !== HostRoot && parent.tag !== SuspenseComponent) {
               parent = parent.return;
             }
             hydrationParentFiber = parent;
@@ -12520,7 +12520,7 @@
               return false;
             }
             var type = fiber.type;
-            if (fiber.tag !== HostComponent || type !== "head" && type !== "body" && !shouldSetTextContent(type, fiber.memoizedProps)) {
+            if (fiber.tag !== HostComponent2 || type !== "head" && type !== "body" && !shouldSetTextContent(type, fiber.memoizedProps)) {
               var nextInstance = nextHydratableInstance;
               while (nextInstance) {
                 deleteHydratableInstance(fiber, nextInstance);
@@ -15518,7 +15518,7 @@
                     pushHostRootContext(workInProgress2);
                     resetHydrationState();
                     break;
-                  case HostComponent:
+                  case HostComponent2:
                     pushHostContext(workInProgress2);
                     break;
                   case ClassComponent: {
@@ -15630,7 +15630,7 @@
               }
               case HostRoot:
                 return updateHostRoot(current2, workInProgress2, renderLanes2);
-              case HostComponent:
+              case HostComponent2:
                 return updateHostComponent(current2, workInProgress2, renderLanes2);
               case HostText:
                 return updateHostText(current2, workInProgress2);
@@ -15644,7 +15644,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment3:
+              case Fragment4:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -15717,7 +15717,7 @@
             appendAllChildren = function(parent, workInProgress2, needsVisibilityToggle, isHidden) {
               var node = workInProgress2.child;
               while (node !== null) {
-                if (node.tag === HostComponent || node.tag === HostText) {
+                if (node.tag === HostComponent2 || node.tag === HostText) {
                   appendInitialChild(parent, node.stateNode);
                 } else if (node.tag === HostPortal)
                   ;
@@ -15811,7 +15811,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment3:
+              case Fragment4:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -15844,7 +15844,7 @@
                 updateHostContainer(workInProgress2);
                 return null;
               }
-              case HostComponent: {
+              case HostComponent2: {
                 popHostContext(workInProgress2);
                 var rootContainerInstance = getRootHostContainer();
                 var type = workInProgress2.type;
@@ -16128,7 +16128,7 @@
                 workInProgress2.flags = _flags & ~ShouldCapture | DidCapture;
                 return workInProgress2;
               }
-              case HostComponent: {
+              case HostComponent2: {
                 popHostContext(workInProgress2);
                 return null;
               }
@@ -16177,7 +16177,7 @@
                 resetWorkInProgressVersions();
                 break;
               }
-              case HostComponent: {
+              case HostComponent2: {
                 popHostContext(interruptedWork);
                 break;
               }
@@ -16498,7 +16498,7 @@
                 }
                 return;
               }
-              case HostComponent:
+              case HostComponent2:
               case HostText:
               case HostPortal:
               case IncompleteClassComponent:
@@ -16642,7 +16642,7 @@
                   var _instance = null;
                   if (finishedWork.child !== null) {
                     switch (finishedWork.child.tag) {
-                      case HostComponent:
+                      case HostComponent2:
                         _instance = getPublicInstance(finishedWork.child.stateNode);
                         break;
                       case ClassComponent:
@@ -16654,7 +16654,7 @@
                 }
                 return;
               }
-              case HostComponent: {
+              case HostComponent2: {
                 var _instance2 = finishedWork.stateNode;
                 if (current2 === null && finishedWork.flags & Update) {
                   var type = finishedWork.type;
@@ -16704,7 +16704,7 @@
             {
               var node = finishedWork;
               while (true) {
-                if (node.tag === HostComponent) {
+                if (node.tag === HostComponent2) {
                   var instance = node.stateNode;
                   if (isHidden) {
                     hideInstance(instance);
@@ -16745,7 +16745,7 @@
               var instance = finishedWork.stateNode;
               var instanceToUse;
               switch (finishedWork.tag) {
-                case HostComponent:
+                case HostComponent2:
                   instanceToUse = getPublicInstance(instance);
                   break;
                 default:
@@ -16812,7 +16812,7 @@
                 }
                 return;
               }
-              case HostComponent: {
+              case HostComponent2: {
                 safelyDetachRef(current2);
                 return;
               }
@@ -16885,7 +16885,7 @@
             }
           }
           function isHostParent(fiber) {
-            return fiber.tag === HostComponent || fiber.tag === HostRoot || fiber.tag === HostPortal;
+            return fiber.tag === HostComponent2 || fiber.tag === HostRoot || fiber.tag === HostPortal;
           }
           function getHostSibling(fiber) {
             var node = fiber;
@@ -16899,7 +16899,7 @@
                 }
                 node.sibling.return = node.return;
                 node = node.sibling;
-                while (node.tag !== HostComponent && node.tag !== HostText && node.tag !== DehydratedFragment) {
+                while (node.tag !== HostComponent2 && node.tag !== HostText && node.tag !== DehydratedFragment) {
                   if (node.flags & Placement) {
                     continue siblings;
                   }
@@ -16921,7 +16921,7 @@
             var isContainer;
             var parentStateNode = parentFiber.stateNode;
             switch (parentFiber.tag) {
-              case HostComponent:
+              case HostComponent2:
                 parent = parentStateNode;
                 isContainer = false;
                 break;
@@ -16953,7 +16953,7 @@
           }
           function insertOrAppendPlacementNodeIntoContainer(node, before, parent) {
             var tag = node.tag;
-            var isHost = tag === HostComponent || tag === HostText;
+            var isHost = tag === HostComponent2 || tag === HostText;
             if (isHost || enableFundamentalAPI) {
               var stateNode = isHost ? node.stateNode : node.stateNode.instance;
               if (before) {
@@ -16977,7 +16977,7 @@
           }
           function insertOrAppendPlacementNode(node, before, parent) {
             var tag = node.tag;
-            var isHost = tag === HostComponent || tag === HostText;
+            var isHost = tag === HostComponent2 || tag === HostText;
             if (isHost || enableFundamentalAPI) {
               var stateNode = isHost ? node.stateNode : node.stateNode.instance;
               if (before) {
@@ -17016,7 +17016,7 @@
                     }
                     var parentStateNode = parent.stateNode;
                     switch (parent.tag) {
-                      case HostComponent:
+                      case HostComponent2:
                         currentParent = parentStateNode;
                         currentParentIsContainer = false;
                         break findParent;
@@ -17033,7 +17033,7 @@
                   }
                 currentParentIsValid = true;
               }
-              if (node.tag === HostComponent || node.tag === HostText) {
+              if (node.tag === HostComponent2 || node.tag === HostText) {
                 commitNestedUnmounts(finishedRoot, node);
                 if (currentParentIsContainer) {
                   removeChildFromContainer(currentParent, node.stateNode);
@@ -17097,7 +17097,7 @@
               case ClassComponent: {
                 return;
               }
-              case HostComponent: {
+              case HostComponent2: {
                 var instance = finishedWork.stateNode;
                 if (instance != null) {
                   var newProps = finishedWork.memoizedProps;
@@ -19163,7 +19163,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               var node = fiber;
               while (true) {
                 switch (node.tag) {
-                  case HostComponent:
+                  case HostComponent2:
                     hostInstances.add(node.stateNode);
                     return;
                   case HostPortal:
@@ -19185,7 +19185,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               var node = fiber;
               var foundHostInstances = false;
               while (true) {
-                if (node.tag === HostComponent) {
+                if (node.tag === HostComponent2) {
                   foundHostInstances = true;
                   hostInstances.add(node.stateNode);
                 } else if (node.child !== null) {
@@ -19420,7 +19420,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
                 }
               }
             } else if (typeof type === "string") {
-              fiberTag = HostComponent;
+              fiberTag = HostComponent2;
             } else {
               getTag:
                 switch (type) {
@@ -19515,7 +19515,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment3, elements, key, mode);
+            var fiber = createFiber(Fragment4, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -19577,7 +19577,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             return fiber;
           }
           function createFiberFromHostInstanceForDeletion() {
-            var fiber = createFiber(HostComponent, null, null, NoMode);
+            var fiber = createFiber(HostComponent2, null, null, NoMode);
             fiber.elementType = "DELETED";
             fiber.type = "DELETED";
             return fiber;
@@ -19822,7 +19822,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               return null;
             }
             switch (containerFiber.child.tag) {
-              case HostComponent:
+              case HostComponent2:
                 return getPublicInstance(containerFiber.child.stateNode);
               default:
                 return containerFiber.child.stateNode;
@@ -20420,18 +20420,896 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   });
 
   // index.tsx
-  var React3 = __toESM(require_react());
+  var React5 = __toESM(require_react());
   var ReactDOM = __toESM(require_react_dom());
 
+  // node_modules/react-router-dom/index.js
+  var import_react2 = __toESM(require_react());
+
+  // node_modules/@babel/runtime/helpers/esm/extends.js
+  function _extends() {
+    _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends.apply(this, arguments);
+  }
+
+  // node_modules/history/index.js
+  var r;
+  var B = r || (r = {});
+  B.Pop = "POP";
+  B.Push = "PUSH";
+  B.Replace = "REPLACE";
+  var C = true ? function(b) {
+    return Object.freeze(b);
+  } : function(b) {
+    return b;
+  };
+  function D(b, h) {
+    if (!b) {
+      typeof console !== "undefined" && console.warn(h);
+      try {
+        throw Error(h);
+      } catch (e) {
+      }
+    }
+  }
+  function E(b) {
+    b.preventDefault();
+    b.returnValue = "";
+  }
+  function F() {
+    var b = [];
+    return { get length() {
+      return b.length;
+    }, push: function(h) {
+      b.push(h);
+      return function() {
+        b = b.filter(function(e) {
+          return e !== h;
+        });
+      };
+    }, call: function(h) {
+      b.forEach(function(e) {
+        return e && e(h);
+      });
+    } };
+  }
+  function H() {
+    return Math.random().toString(36).substr(2, 8);
+  }
+  function I(b) {
+    var h = b.pathname;
+    h = h === void 0 ? "/" : h;
+    var e = b.search;
+    e = e === void 0 ? "" : e;
+    b = b.hash;
+    b = b === void 0 ? "" : b;
+    e && e !== "?" && (h += e.charAt(0) === "?" ? e : "?" + e);
+    b && b !== "#" && (h += b.charAt(0) === "#" ? b : "#" + b);
+    return h;
+  }
+  function J(b) {
+    var h = {};
+    if (b) {
+      var e = b.indexOf("#");
+      0 <= e && (h.hash = b.substr(e), b = b.substr(0, e));
+      e = b.indexOf("?");
+      0 <= e && (h.search = b.substr(e), b = b.substr(0, e));
+      b && (h.pathname = b);
+    }
+    return h;
+  }
+  function createBrowserHistory(b) {
+    function h() {
+      var c = p.location, a = m.state || {};
+      return [a.idx, C({ pathname: c.pathname, search: c.search, hash: c.hash, state: a.usr || null, key: a.key || "default" })];
+    }
+    function e(c) {
+      return typeof c === "string" ? c : I(c);
+    }
+    function x(c, a) {
+      a === void 0 && (a = null);
+      return C(_extends({ pathname: q.pathname, hash: "", search: "" }, typeof c === "string" ? J(c) : c, { state: a, key: H() }));
+    }
+    function z(c) {
+      t = c;
+      c = h();
+      v = c[0];
+      q = c[1];
+      d.call({ action: t, location: q });
+    }
+    function A(c, a) {
+      function f() {
+        A(c, a);
+      }
+      var l = r.Push, k = x(c, a);
+      if (!g.length || (g.call({ action: l, location: k, retry: f }), false)) {
+        var n = [{ usr: k.state, key: k.key, idx: v + 1 }, e(k)];
+        k = n[0];
+        n = n[1];
+        try {
+          m.pushState(k, "", n);
+        } catch (G) {
+          p.location.assign(n);
+        }
+        z(l);
+      }
+    }
+    function y(c, a) {
+      function f() {
+        y(c, a);
+      }
+      var l = r.Replace, k = x(c, a);
+      g.length && (g.call({ action: l, location: k, retry: f }), 1) || (k = [{ usr: k.state, key: k.key, idx: v }, e(k)], m.replaceState(k[0], "", k[1]), z(l));
+    }
+    function w(c) {
+      m.go(c);
+    }
+    b === void 0 && (b = {});
+    b = b.window;
+    var p = b === void 0 ? document.defaultView : b, m = p.history, u = null;
+    p.addEventListener("popstate", function() {
+      if (u)
+        g.call(u), u = null;
+      else {
+        var c = r.Pop, a = h(), f = a[0];
+        a = a[1];
+        if (g.length)
+          if (f != null) {
+            var l = v - f;
+            l && (u = { action: c, location: a, retry: function() {
+              w(-1 * l);
+            } }, w(l));
+          } else
+            true ? D(false, "You are trying to block a POP navigation to a location that was not created by the history library. The block will fail silently in production, but in general you should do all navigation with the history library (instead of using window.history.pushState directly) to avoid this situation.") : void 0;
+        else
+          z(c);
+      }
+    });
+    var t = r.Pop;
+    b = h();
+    var v = b[0], q = b[1], d = F(), g = F();
+    v == null && (v = 0, m.replaceState(_extends({}, m.state, { idx: v }), ""));
+    return { get action() {
+      return t;
+    }, get location() {
+      return q;
+    }, createHref: e, push: A, replace: y, go: w, back: function() {
+      w(-1);
+    }, forward: function() {
+      w(1);
+    }, listen: function(c) {
+      return d.push(c);
+    }, block: function(c) {
+      var a = g.push(c);
+      g.length === 1 && p.addEventListener("beforeunload", E);
+      return function() {
+        a();
+        g.length || p.removeEventListener("beforeunload", E);
+      };
+    } };
+  }
+
+  // node_modules/react-router/index.js
+  var import_react = __toESM(require_react());
+  function invariant(cond, message) {
+    if (!cond)
+      throw new Error(message);
+  }
+  function warning(cond, message) {
+    if (!cond) {
+      if (typeof console !== "undefined")
+        console.warn(message);
+      try {
+        throw new Error(message);
+      } catch (e) {
+      }
+    }
+  }
+  var alreadyWarned = {};
+  function warningOnce(key, cond, message) {
+    if (!cond && !alreadyWarned[key]) {
+      alreadyWarned[key] = true;
+      true ? warning(false, message) : void 0;
+    }
+  }
+  var NavigationContext = /* @__PURE__ */ (0, import_react.createContext)(null);
+  if (true) {
+    NavigationContext.displayName = "Navigation";
+  }
+  var LocationContext = /* @__PURE__ */ (0, import_react.createContext)(null);
+  if (true) {
+    LocationContext.displayName = "Location";
+  }
+  var RouteContext = /* @__PURE__ */ (0, import_react.createContext)({
+    outlet: null,
+    matches: []
+  });
+  if (true) {
+    RouteContext.displayName = "Route";
+  }
+  function Outlet(props) {
+    return useOutlet(props.context);
+  }
+  function Route(_props) {
+    true ? invariant(false, "A <Route> is only ever to be used as the child of <Routes> element, never rendered directly. Please wrap your <Route> in a <Routes>.") : invariant(false);
+  }
+  function Router(_ref3) {
+    let {
+      basename: basenameProp = "/",
+      children = null,
+      location: locationProp,
+      navigationType = r.Pop,
+      navigator: navigator2,
+      static: staticProp = false
+    } = _ref3;
+    !!useInRouterContext() ? true ? invariant(false, "You cannot render a <Router> inside another <Router>. You should never have more than one in your app.") : invariant(false) : void 0;
+    let basename = normalizePathname(basenameProp);
+    let navigationContext = (0, import_react.useMemo)(() => ({
+      basename,
+      navigator: navigator2,
+      static: staticProp
+    }), [basename, navigator2, staticProp]);
+    if (typeof locationProp === "string") {
+      locationProp = J(locationProp);
+    }
+    let {
+      pathname = "/",
+      search = "",
+      hash = "",
+      state = null,
+      key = "default"
+    } = locationProp;
+    let location = (0, import_react.useMemo)(() => {
+      let trailingPathname = stripBasename(pathname, basename);
+      if (trailingPathname == null) {
+        return null;
+      }
+      return {
+        pathname: trailingPathname,
+        search,
+        hash,
+        state,
+        key
+      };
+    }, [basename, pathname, search, hash, state, key]);
+    true ? warning(location != null, '<Router basename="' + basename + '"> is not able to match the URL ' + ('"' + pathname + search + hash + '" because it does not start with the ') + "basename, so the <Router> won't render anything.") : void 0;
+    if (location == null) {
+      return null;
+    }
+    return /* @__PURE__ */ (0, import_react.createElement)(NavigationContext.Provider, {
+      value: navigationContext
+    }, /* @__PURE__ */ (0, import_react.createElement)(LocationContext.Provider, {
+      children,
+      value: {
+        location,
+        navigationType
+      }
+    }));
+  }
+  function Routes(_ref4) {
+    let {
+      children,
+      location
+    } = _ref4;
+    return useRoutes(createRoutesFromChildren(children), location);
+  }
+  function useHref(to) {
+    !useInRouterContext() ? true ? invariant(false, "useHref() may be used only in the context of a <Router> component.") : invariant(false) : void 0;
+    let {
+      basename,
+      navigator: navigator2
+    } = (0, import_react.useContext)(NavigationContext);
+    let {
+      hash,
+      pathname,
+      search
+    } = useResolvedPath(to);
+    let joinedPathname = pathname;
+    if (basename !== "/") {
+      let toPathname = getToPathname(to);
+      let endsWithSlash = toPathname != null && toPathname.endsWith("/");
+      joinedPathname = pathname === "/" ? basename + (endsWithSlash ? "/" : "") : joinPaths([basename, pathname]);
+    }
+    return navigator2.createHref({
+      pathname: joinedPathname,
+      search,
+      hash
+    });
+  }
+  function useInRouterContext() {
+    return (0, import_react.useContext)(LocationContext) != null;
+  }
+  function useLocation() {
+    !useInRouterContext() ? true ? invariant(false, "useLocation() may be used only in the context of a <Router> component.") : invariant(false) : void 0;
+    return (0, import_react.useContext)(LocationContext).location;
+  }
+  function useNavigate() {
+    !useInRouterContext() ? true ? invariant(false, "useNavigate() may be used only in the context of a <Router> component.") : invariant(false) : void 0;
+    let {
+      basename,
+      navigator: navigator2
+    } = (0, import_react.useContext)(NavigationContext);
+    let {
+      matches
+    } = (0, import_react.useContext)(RouteContext);
+    let {
+      pathname: locationPathname
+    } = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
+    let activeRef = (0, import_react.useRef)(false);
+    (0, import_react.useEffect)(() => {
+      activeRef.current = true;
+    });
+    let navigate = (0, import_react.useCallback)(function(to, options) {
+      if (options === void 0) {
+        options = {};
+      }
+      true ? warning(activeRef.current, "You should call navigate() in a React.useEffect(), not when your component is first rendered.") : void 0;
+      if (!activeRef.current)
+        return;
+      if (typeof to === "number") {
+        navigator2.go(to);
+        return;
+      }
+      let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
+      if (basename !== "/") {
+        path.pathname = joinPaths([basename, path.pathname]);
+      }
+      (!!options.replace ? navigator2.replace : navigator2.push)(path, options.state);
+    }, [basename, navigator2, routePathnamesJson, locationPathname]);
+    return navigate;
+  }
+  var OutletContext = /* @__PURE__ */ (0, import_react.createContext)(null);
+  function useOutlet(context) {
+    let outlet = (0, import_react.useContext)(RouteContext).outlet;
+    if (outlet) {
+      return /* @__PURE__ */ (0, import_react.createElement)(OutletContext.Provider, {
+        value: context
+      }, outlet);
+    }
+    return outlet;
+  }
+  function useParams() {
+    let {
+      matches
+    } = (0, import_react.useContext)(RouteContext);
+    let routeMatch = matches[matches.length - 1];
+    return routeMatch ? routeMatch.params : {};
+  }
+  function useResolvedPath(to) {
+    let {
+      matches
+    } = (0, import_react.useContext)(RouteContext);
+    let {
+      pathname: locationPathname
+    } = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
+    return (0, import_react.useMemo)(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+  }
+  function useRoutes(routes, locationArg) {
+    !useInRouterContext() ? true ? invariant(false, "useRoutes() may be used only in the context of a <Router> component.") : invariant(false) : void 0;
+    let {
+      matches: parentMatches
+    } = (0, import_react.useContext)(RouteContext);
+    let routeMatch = parentMatches[parentMatches.length - 1];
+    let parentParams = routeMatch ? routeMatch.params : {};
+    let parentPathname = routeMatch ? routeMatch.pathname : "/";
+    let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+    let parentRoute = routeMatch && routeMatch.route;
+    if (true) {
+      let parentPath = parentRoute && parentRoute.path || "";
+      warningOnce(parentPathname, !parentRoute || parentPath.endsWith("*"), "You rendered descendant <Routes> (or called `useRoutes()`) at " + ('"' + parentPathname + '" (under <Route path="' + parentPath + '">) but the ') + `parent route path has no trailing "*". This means if you navigate deeper, the parent won't match anymore and therefore the child routes will never render.
+
+` + ('Please change the parent <Route path="' + parentPath + '"> to <Route ') + ('path="' + (parentPath === "/" ? "*" : parentPath + "/*") + '">.'));
+    }
+    let locationFromContext = useLocation();
+    let location;
+    if (locationArg) {
+      var _parsedLocationArg$pa;
+      let parsedLocationArg = typeof locationArg === "string" ? J(locationArg) : locationArg;
+      !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ? true ? invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, the location pathname must begin with the portion of the URL pathname that was " + ('matched by all parent routes. The current pathname base is "' + parentPathnameBase + '" ') + ('but pathname "' + parsedLocationArg.pathname + '" was given in the `location` prop.')) : invariant(false) : void 0;
+      location = parsedLocationArg;
+    } else {
+      location = locationFromContext;
+    }
+    let pathname = location.pathname || "/";
+    let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+    let matches = matchRoutes(routes, {
+      pathname: remainingPathname
+    });
+    if (true) {
+      true ? warning(parentRoute || matches != null, 'No routes matched location "' + location.pathname + location.search + location.hash + '" ') : void 0;
+      true ? warning(matches == null || matches[matches.length - 1].route.element !== void 0, 'Matched leaf route at location "' + location.pathname + location.search + location.hash + '" does not have an element. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.') : void 0;
+    }
+    return _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
+      params: Object.assign({}, parentParams, match.params),
+      pathname: joinPaths([parentPathnameBase, match.pathname]),
+      pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+    })), parentMatches);
+  }
+  function createRoutesFromChildren(children) {
+    let routes = [];
+    import_react.Children.forEach(children, (element) => {
+      if (!/* @__PURE__ */ (0, import_react.isValidElement)(element)) {
+        return;
+      }
+      if (element.type === import_react.Fragment) {
+        routes.push.apply(routes, createRoutesFromChildren(element.props.children));
+        return;
+      }
+      !(element.type === Route) ? true ? invariant(false, "[" + (typeof element.type === "string" ? element.type : element.type.name) + "] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>") : invariant(false) : void 0;
+      let route = {
+        caseSensitive: element.props.caseSensitive,
+        element: element.props.element,
+        index: element.props.index,
+        path: element.props.path
+      };
+      if (element.props.children) {
+        route.children = createRoutesFromChildren(element.props.children);
+      }
+      routes.push(route);
+    });
+    return routes;
+  }
+  function matchRoutes(routes, locationArg, basename) {
+    if (basename === void 0) {
+      basename = "/";
+    }
+    let location = typeof locationArg === "string" ? J(locationArg) : locationArg;
+    let pathname = stripBasename(location.pathname || "/", basename);
+    if (pathname == null) {
+      return null;
+    }
+    let branches = flattenRoutes(routes);
+    rankRouteBranches(branches);
+    let matches = null;
+    for (let i = 0; matches == null && i < branches.length; ++i) {
+      matches = matchRouteBranch(branches[i], pathname);
+    }
+    return matches;
+  }
+  function flattenRoutes(routes, branches, parentsMeta, parentPath) {
+    if (branches === void 0) {
+      branches = [];
+    }
+    if (parentsMeta === void 0) {
+      parentsMeta = [];
+    }
+    if (parentPath === void 0) {
+      parentPath = "";
+    }
+    routes.forEach((route, index) => {
+      let meta = {
+        relativePath: route.path || "",
+        caseSensitive: route.caseSensitive === true,
+        childrenIndex: index,
+        route
+      };
+      if (meta.relativePath.startsWith("/")) {
+        !meta.relativePath.startsWith(parentPath) ? true ? invariant(false, 'Absolute route path "' + meta.relativePath + '" nested under path ' + ('"' + parentPath + '" is not valid. An absolute child route path ') + "must start with the combined path of all its parent routes.") : invariant(false) : void 0;
+        meta.relativePath = meta.relativePath.slice(parentPath.length);
+      }
+      let path = joinPaths([parentPath, meta.relativePath]);
+      let routesMeta = parentsMeta.concat(meta);
+      if (route.children && route.children.length > 0) {
+        !(route.index !== true) ? true ? invariant(false, "Index routes must not have child routes. Please remove " + ('all child routes from route path "' + path + '".')) : invariant(false) : void 0;
+        flattenRoutes(route.children, branches, routesMeta, path);
+      }
+      if (route.path == null && !route.index) {
+        return;
+      }
+      branches.push({
+        path,
+        score: computeScore(path, route.index),
+        routesMeta
+      });
+    });
+    return branches;
+  }
+  function rankRouteBranches(branches) {
+    branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b.routesMeta.map((meta) => meta.childrenIndex)));
+  }
+  var paramRe = /^:\w+$/;
+  var dynamicSegmentValue = 3;
+  var indexRouteValue = 2;
+  var emptySegmentValue = 1;
+  var staticSegmentValue = 10;
+  var splatPenalty = -2;
+  var isSplat = (s) => s === "*";
+  function computeScore(path, index) {
+    let segments = path.split("/");
+    let initialScore = segments.length;
+    if (segments.some(isSplat)) {
+      initialScore += splatPenalty;
+    }
+    if (index) {
+      initialScore += indexRouteValue;
+    }
+    return segments.filter((s) => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+  }
+  function compareIndexes(a, b) {
+    let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+    return siblings ? a[a.length - 1] - b[b.length - 1] : 0;
+  }
+  function matchRouteBranch(branch, pathname) {
+    let {
+      routesMeta
+    } = branch;
+    let matchedParams = {};
+    let matchedPathname = "/";
+    let matches = [];
+    for (let i = 0; i < routesMeta.length; ++i) {
+      let meta = routesMeta[i];
+      let end = i === routesMeta.length - 1;
+      let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+      let match = matchPath({
+        path: meta.relativePath,
+        caseSensitive: meta.caseSensitive,
+        end
+      }, remainingPathname);
+      if (!match)
+        return null;
+      Object.assign(matchedParams, match.params);
+      let route = meta.route;
+      matches.push({
+        params: matchedParams,
+        pathname: joinPaths([matchedPathname, match.pathname]),
+        pathnameBase: joinPaths([matchedPathname, match.pathnameBase]),
+        route
+      });
+      if (match.pathnameBase !== "/") {
+        matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
+      }
+    }
+    return matches;
+  }
+  function _renderMatches(matches, parentMatches) {
+    if (parentMatches === void 0) {
+      parentMatches = [];
+    }
+    if (matches == null)
+      return null;
+    return matches.reduceRight((outlet, match, index) => {
+      return /* @__PURE__ */ (0, import_react.createElement)(RouteContext.Provider, {
+        children: match.route.element !== void 0 ? match.route.element : /* @__PURE__ */ (0, import_react.createElement)(Outlet, null),
+        value: {
+          outlet,
+          matches: parentMatches.concat(matches.slice(0, index + 1))
+        }
+      });
+    }, null);
+  }
+  function matchPath(pattern, pathname) {
+    if (typeof pattern === "string") {
+      pattern = {
+        path: pattern,
+        caseSensitive: false,
+        end: true
+      };
+    }
+    let [matcher, paramNames] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+    let match = pathname.match(matcher);
+    if (!match)
+      return null;
+    let matchedPathname = match[0];
+    let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+    let captureGroups = match.slice(1);
+    let params = paramNames.reduce((memo, paramName, index) => {
+      if (paramName === "*") {
+        let splatValue = captureGroups[index] || "";
+        pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+      }
+      memo[paramName] = safelyDecodeURIComponent(captureGroups[index] || "", paramName);
+      return memo;
+    }, {});
+    return {
+      params,
+      pathname: matchedPathname,
+      pathnameBase,
+      pattern
+    };
+  }
+  function compilePath(path, caseSensitive, end) {
+    if (caseSensitive === void 0) {
+      caseSensitive = false;
+    }
+    if (end === void 0) {
+      end = true;
+    }
+    true ? warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), 'Route path "' + path + '" will be treated as if it were ' + ('"' + path.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path.replace(/\*$/, "/*") + '".')) : void 0;
+    let paramNames = [];
+    let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/:(\w+)/g, (_, paramName) => {
+      paramNames.push(paramName);
+      return "([^\\/]+)";
+    });
+    if (path.endsWith("*")) {
+      paramNames.push("*");
+      regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
+    } else {
+      regexpSource += end ? "\\/*$" : "(?:\\b|\\/|$)";
+    }
+    let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
+    return [matcher, paramNames];
+  }
+  function safelyDecodeURIComponent(value, paramName) {
+    try {
+      return decodeURIComponent(value);
+    } catch (error) {
+      true ? warning(false, 'The value for the URL param "' + paramName + '" will not be decoded because' + (' the string "' + value + '" is a malformed URL segment. This is probably') + (" due to a bad percent encoding (" + error + ").")) : void 0;
+      return value;
+    }
+  }
+  function resolvePath(to, fromPathname) {
+    if (fromPathname === void 0) {
+      fromPathname = "/";
+    }
+    let {
+      pathname: toPathname,
+      search = "",
+      hash = ""
+    } = typeof to === "string" ? J(to) : to;
+    let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+    return {
+      pathname,
+      search: normalizeSearch(search),
+      hash: normalizeHash(hash)
+    };
+  }
+  function resolvePathname(relativePath, fromPathname) {
+    let segments = fromPathname.replace(/\/+$/, "").split("/");
+    let relativeSegments = relativePath.split("/");
+    relativeSegments.forEach((segment) => {
+      if (segment === "..") {
+        if (segments.length > 1)
+          segments.pop();
+      } else if (segment !== ".") {
+        segments.push(segment);
+      }
+    });
+    return segments.length > 1 ? segments.join("/") : "/";
+  }
+  function resolveTo(toArg, routePathnames, locationPathname) {
+    let to = typeof toArg === "string" ? J(toArg) : toArg;
+    let toPathname = toArg === "" || to.pathname === "" ? "/" : to.pathname;
+    let from;
+    if (toPathname == null) {
+      from = locationPathname;
+    } else {
+      let routePathnameIndex = routePathnames.length - 1;
+      if (toPathname.startsWith("..")) {
+        let toSegments = toPathname.split("/");
+        while (toSegments[0] === "..") {
+          toSegments.shift();
+          routePathnameIndex -= 1;
+        }
+        to.pathname = toSegments.join("/");
+      }
+      from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+    }
+    let path = resolvePath(to, from);
+    if (toPathname && toPathname !== "/" && toPathname.endsWith("/") && !path.pathname.endsWith("/")) {
+      path.pathname += "/";
+    }
+    return path;
+  }
+  function getToPathname(to) {
+    return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? J(to).pathname : to.pathname;
+  }
+  function stripBasename(pathname, basename) {
+    if (basename === "/")
+      return pathname;
+    if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+      return null;
+    }
+    let nextChar = pathname.charAt(basename.length);
+    if (nextChar && nextChar !== "/") {
+      return null;
+    }
+    return pathname.slice(basename.length) || "/";
+  }
+  var joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
+  var normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+  var normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+  var normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+
+  // node_modules/react-router-dom/index.js
+  function _extends2() {
+    _extends2 = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends2.apply(this, arguments);
+  }
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null)
+      return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  var _excluded = ["onClick", "reloadDocument", "replace", "state", "target", "to"];
+  var _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"];
+  function BrowserRouter(_ref) {
+    let {
+      basename,
+      children,
+      window: window2
+    } = _ref;
+    let historyRef = (0, import_react2.useRef)();
+    if (historyRef.current == null) {
+      historyRef.current = createBrowserHistory({
+        window: window2
+      });
+    }
+    let history = historyRef.current;
+    let [state, setState] = (0, import_react2.useState)({
+      action: history.action,
+      location: history.location
+    });
+    (0, import_react2.useLayoutEffect)(() => history.listen(setState), [history]);
+    return /* @__PURE__ */ (0, import_react2.createElement)(Router, {
+      basename,
+      children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history
+    });
+  }
+  function HistoryRouter(_ref3) {
+    let {
+      basename,
+      children,
+      history
+    } = _ref3;
+    const [state, setState] = (0, import_react2.useState)({
+      action: history.action,
+      location: history.location
+    });
+    (0, import_react2.useLayoutEffect)(() => history.listen(setState), [history]);
+    return /* @__PURE__ */ (0, import_react2.createElement)(Router, {
+      basename,
+      children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history
+    });
+  }
+  if (true) {
+    HistoryRouter.displayName = "unstable_HistoryRouter";
+  }
+  function isModifiedEvent(event) {
+    return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+  }
+  var Link = /* @__PURE__ */ (0, import_react2.forwardRef)(function LinkWithRef(_ref4, ref) {
+    let {
+      onClick,
+      reloadDocument,
+      replace = false,
+      state,
+      target,
+      to
+    } = _ref4, rest = _objectWithoutPropertiesLoose(_ref4, _excluded);
+    let href = useHref(to);
+    let internalOnClick = useLinkClickHandler(to, {
+      replace,
+      state,
+      target
+    });
+    function handleClick(event) {
+      if (onClick)
+        onClick(event);
+      if (!event.defaultPrevented && !reloadDocument) {
+        internalOnClick(event);
+      }
+    }
+    return /* @__PURE__ */ (0, import_react2.createElement)("a", _extends2({}, rest, {
+      href,
+      onClick: handleClick,
+      ref,
+      target
+    }));
+  });
+  if (true) {
+    Link.displayName = "Link";
+  }
+  var NavLink = /* @__PURE__ */ (0, import_react2.forwardRef)(function NavLinkWithRef(_ref5, ref) {
+    let {
+      "aria-current": ariaCurrentProp = "page",
+      caseSensitive = false,
+      className: classNameProp = "",
+      end = false,
+      style: styleProp,
+      to,
+      children
+    } = _ref5, rest = _objectWithoutPropertiesLoose(_ref5, _excluded2);
+    let location = useLocation();
+    let path = useResolvedPath(to);
+    let locationPathname = location.pathname;
+    let toPathname = path.pathname;
+    if (!caseSensitive) {
+      locationPathname = locationPathname.toLowerCase();
+      toPathname = toPathname.toLowerCase();
+    }
+    let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(toPathname.length) === "/";
+    let ariaCurrent = isActive ? ariaCurrentProp : void 0;
+    let className;
+    if (typeof classNameProp === "function") {
+      className = classNameProp({
+        isActive
+      });
+    } else {
+      className = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
+    }
+    let style = typeof styleProp === "function" ? styleProp({
+      isActive
+    }) : styleProp;
+    return /* @__PURE__ */ (0, import_react2.createElement)(Link, _extends2({}, rest, {
+      "aria-current": ariaCurrent,
+      className,
+      ref,
+      style,
+      to
+    }), typeof children === "function" ? children({
+      isActive
+    }) : children);
+  });
+  if (true) {
+    NavLink.displayName = "NavLink";
+  }
+  function useLinkClickHandler(to, _temp) {
+    let {
+      target,
+      replace: replaceProp,
+      state
+    } = _temp === void 0 ? {} : _temp;
+    let navigate = useNavigate();
+    let location = useLocation();
+    let path = useResolvedPath(to);
+    return (0, import_react2.useCallback)((event) => {
+      if (event.button === 0 && (!target || target === "_self") && !isModifiedEvent(event)) {
+        event.preventDefault();
+        let replace = !!replaceProp || I(location) === I(path);
+        navigate(to, {
+          replace,
+          state
+        });
+      }
+    }, [location, navigate, path, replaceProp, state, target, to]);
+  }
+
   // components/app.tsx
-  var React2 = __toESM(require_react());
+  var React = __toESM(require_react());
 
   // hooks/use_config.ts
-  var import_react = __toESM(require_react());
+  var import_react3 = __toESM(require_react());
   var useConfig = () => {
-    const [config, setConfig] = (0, import_react.useState)(void 0);
-    const [configError, setConfigError] = (0, import_react.useState)(void 0);
-    (0, import_react.useEffect)(() => {
+    const [config, setConfig] = (0, import_react3.useState)(void 0);
+    const [configError, setConfigError] = (0, import_react3.useState)(void 0);
+    (0, import_react3.useEffect)(() => {
       const source = new EventSource("/api/watch-config");
       source.addEventListener("message", (e) => {
         try {
@@ -20448,11 +21326,25 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }, []);
     return { config, configError };
   };
+  var useHostsFileEntry = (host) => {
+    const { config } = useConfig();
+    const [hostsFileEntry, setHostsFileEntry] = (0, import_react3.useState)(void 0);
+    (0, import_react3.useEffect)(() => {
+      if (config && host) {
+        setHostsFileEntry(config.hosts.entries.find((e) => e.host === host));
+      } else {
+        setHostsFileEntry(void 0);
+      }
+    }, [config, host]);
+    return hostsFileEntry;
+  };
+  var ConfigContext = (0, import_react3.createContext)(void 0);
+  var useConfigContext = () => (0, import_react3.useContext)(ConfigContext);
 
   // hooks/use_live_admin.ts
-  var import_react2 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
   var useLiveAdmin = () => {
-    (0, import_react2.useEffect)(() => {
+    (0, import_react4.useEffect)(() => {
       if (window.localStorage.getItem("__live_admin")) {
         console.info("Listening for live admin updates...");
         const source = new EventSource("/__live_admin");
@@ -20476,38 +21368,79 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }, []);
   };
 
-  // components/dashboard.tsx
-  var React = __toESM(require_react());
-  var DashboardComponent = ({ config }) => {
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Host"), /* @__PURE__ */ React.createElement("th", null, "Proxy To"))), /* @__PURE__ */ React.createElement("tbody", null, config.hosts.entries.map((e, index) => /* @__PURE__ */ React.createElement("tr", {
-      key: `${e.host}-${e.lineNumber}-${index}`
-    }, /* @__PURE__ */ React.createElement("td", null, e.proxied ? /* @__PURE__ */ React.createElement("a", {
-      href: `http://${e.host}`
-    }, e.host) : e.host), /* @__PURE__ */ React.createElement("td", null, e.proxied ? /* @__PURE__ */ React.createElement("a", {
-      href: `http://${e.proxyIp}:${e.proxyPort}`
-    }, `${e.proxyIp}:${e.proxyPort}`) : "\u2717"))))));
-  };
-  var dashboard_default = DashboardComponent;
-
   // components/app.tsx
   var AppComponent = () => {
     useLiveAdmin();
     const { config, configError } = useConfig();
     if (!config) {
-      return /* @__PURE__ */ React2.createElement("div", {
+      return /* @__PURE__ */ React.createElement("div", {
         className: "centered"
       }, "Loading configuration");
     }
-    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, configError && /* @__PURE__ */ React2.createElement("div", {
+    return /* @__PURE__ */ React.createElement(ConfigContext.Provider, {
+      value: config
+    }, configError && /* @__PURE__ */ React.createElement("div", {
       className: "error"
-    }, configError), /* @__PURE__ */ React2.createElement(dashboard_default, {
-      config
-    }));
+    }, configError), /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement(Link, {
+      to: "/"
+    }, "Dashboard"), " | ", /* @__PURE__ */ React.createElement(Link, {
+      to: "/hosts"
+    }, "All Hosts")), /* @__PURE__ */ React.createElement(Outlet, null));
   };
   var app_default = AppComponent;
 
+  // components/dashboard.tsx
+  var React3 = __toESM(require_react());
+
+  // components/hosts.tsx
+  var React2 = __toESM(require_react());
+  var HostsComponent = () => {
+    const config = useConfigContext();
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("table", null, /* @__PURE__ */ React2.createElement("thead", null, /* @__PURE__ */ React2.createElement("tr", null, /* @__PURE__ */ React2.createElement("th", null, "Host"), /* @__PURE__ */ React2.createElement("th", null, "Proxies To"))), /* @__PURE__ */ React2.createElement("tbody", null, config == null ? void 0 : config.hosts.entries.map((e, index) => /* @__PURE__ */ React2.createElement("tr", {
+      key: `${e.host}-${e.lineNumber}-${index}`
+    }, /* @__PURE__ */ React2.createElement("td", null, /* @__PURE__ */ React2.createElement("a", {
+      href: `http://${e.host}`
+    }, "\u2197"), /* @__PURE__ */ React2.createElement(Link, {
+      to: `/hosts/${e.host}`,
+      key: e.host
+    }, e.host)), /* @__PURE__ */ React2.createElement("td", null, e.proxied ? `${e.proxyIp}:${e.proxyPort}` : "\u2717"))))), /* @__PURE__ */ React2.createElement(Outlet, null));
+  };
+  var hosts_default = HostsComponent;
+
+  // components/dashboard.tsx
+  var DashboardComponent = () => {
+    return /* @__PURE__ */ React3.createElement(React3.Fragment, null, /* @__PURE__ */ React3.createElement(hosts_default, null));
+  };
+  var dashboard_default = DashboardComponent;
+
+  // components/host.tsx
+  var React4 = __toESM(require_react());
+  var HostComponent = () => {
+    const { hostId } = useParams();
+    const hostFileEntry = useHostsFileEntry(hostId);
+    return /* @__PURE__ */ React4.createElement("div", null, hostId, /* @__PURE__ */ React4.createElement("p", null, /* @__PURE__ */ React4.createElement("pre", null, JSON.stringify(hostFileEntry, null, 2))));
+  };
+  var host_default = HostComponent;
+
   // index.tsx
-  ReactDOM.render(/* @__PURE__ */ React3.createElement(app_default, null), document.getElementById("app"));
+  ReactDOM.render(/* @__PURE__ */ React5.createElement(BrowserRouter, null, /* @__PURE__ */ React5.createElement(Routes, null, /* @__PURE__ */ React5.createElement(Route, {
+    path: "/",
+    element: /* @__PURE__ */ React5.createElement(app_default, null)
+  }, /* @__PURE__ */ React5.createElement(Route, {
+    index: true,
+    element: /* @__PURE__ */ React5.createElement(dashboard_default, null)
+  }), /* @__PURE__ */ React5.createElement(Route, {
+    path: "hosts",
+    element: /* @__PURE__ */ React5.createElement(hosts_default, null)
+  }), /* @__PURE__ */ React5.createElement(Route, {
+    path: "hosts/:hostId",
+    element: /* @__PURE__ */ React5.createElement(host_default, null)
+  }), /* @__PURE__ */ React5.createElement(Route, {
+    path: "*",
+    element: /* @__PURE__ */ React5.createElement("main", {
+      style: { padding: "1rem" }
+    }, /* @__PURE__ */ React5.createElement("p", null, "There's nothing here!"))
+  })))), document.getElementById("app"));
 })();
 /*
 object-assign
@@ -20526,6 +21459,26 @@ object-assign
  * @return {boolean} True if the event is supported.
  * @internal
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
+ */
+/**
+ * React Router DOM v6.2.1
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+/**
+ * React Router v6.2.1
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
  */
 /** @license React v0.20.2
  * scheduler-tracing.development.js
