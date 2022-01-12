@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/fsnotify/fsnotify"
 )
 
 type AdminPongInfo struct {
@@ -23,9 +25,10 @@ var adminStaticHandler http.Handler
 
 func setupAdminServer() {
 	adminMux = http.NewServeMux()
-	adminMux.Handle("/", http.FileServer(http.FS(adminContent())))
+	adminMux.Handle("/", http.FileServer(http.FS(adminFS())))
 	adminMux.HandleFunc("/ping", handleAdminServerPingRequest)
 	adminMux.HandleFunc("/api/watch-config", handleAdminServerWatchConfigRequest)
+	adminMux.HandleFunc("/__live_admin", handleAdminServerLiveAdminRequest)
 }
 
 func handleAdminServerRequest(w http.ResponseWriter, r *http.Request) {
@@ -56,9 +59,7 @@ func handleAdminServerPingRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleAdminServerWatchConfigRequest(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
+	addSSEHeaders(w)
 
 	/*
 		TODO:
@@ -96,4 +97,35 @@ func handleAdminServerWatchConfigRequest(w http.ResponseWriter, r *http.Request)
 			return
 		}
 	}
+}
+
+func handleAdminServerLiveAdminRequest(w http.ResponseWriter, r *http.Request) {
+	addSSEHeaders(w)
+
+	liveAdminPath, useLiveAdminPath := checkForLiveAdminPath()
+
+	watcher, err := fsnotify.NewWatcher()
+	if err == nil && useLiveAdminPath {
+		watcher.Add(liveAdminPath)
+	}
+	defer watcher.Close()
+
+	flusher, _ := w.(http.Flusher)
+
+	for {
+		select {
+		case event := <-watcher.Events:
+			fmt.Fprintf(w, "data: %s\n\n", event.Name)
+			flusher.Flush()
+
+		case <-r.Context().Done():
+			return
+		}
+	}
+}
+
+func addSSEHeaders(w http.ResponseWriter) {
+	w.Header().Set("Content-Type", "text/event-stream")
+	w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Connection", "keep-alive")
 }

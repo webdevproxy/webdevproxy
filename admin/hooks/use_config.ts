@@ -27,7 +27,7 @@ interface Hostsfile {
   syntaxErrors: HostsFileSyntaxError[]
 }
 
-interface Config {
+export interface Config {
   proxy: ProxyConfig,
   hosts: Hostsfile
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -47,7 +46,7 @@ func setupProxies(hostsfile *Hostsfile) {
 }
 
 func handleProxy(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%s %s", r.Host, r.URL)
+	// log.Printf("%s %s", r.Host, r.URL)
 
 	if r.Host == "local-admin.webdevproxy.com" {
 		handleAdminServerRequest(w, r)

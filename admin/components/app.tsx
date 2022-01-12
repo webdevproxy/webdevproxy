@@ -1,7 +1,11 @@
 import * as React from "react"
+
 import { useConfig } from "../hooks/use_config"
+import { useLiveAdmin } from "../hooks/use_live_admin"
+import DashboardComponent from "./dashboard"
 
 const AppComponent = () => {
+  useLiveAdmin()
   const { config, configError } = useConfig()
 
   if (!config) {
@@ -11,22 +15,7 @@ const AppComponent = () => {
   return (
     <>
       {configError && <div className="error">{configError}</div>}
-      <table>
-        <thead>
-          <tr>
-            <th>Host</th>
-            <th>Proxy To</th>
-          </tr>
-        </thead>
-        <tbody>
-          {config.hosts.entries.map((e, index) => (
-            <tr key={`${e.host}-${e.lineNumber}-${index}`}>
-              <td>{e.proxied ? <a href={`http://${e.host}`}>{e.host}</a> : e.host}</td>
-              <td>{e.proxied ? <a href={`http://${e.proxyIp}:${e.proxyPort}`}>{`${e.proxyIp}:${e.proxyPort}`}</a> : "✗"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <DashboardComponent config={config} />
     </>
   )
 }

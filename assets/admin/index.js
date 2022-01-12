@@ -498,7 +498,7 @@
             }
             return element;
           };
-          function createElement3(type, config, children) {
+          function createElement4(type, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -1056,7 +1056,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect2(create, deps) {
+          function useEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1546,7 +1546,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement3.apply(this, arguments);
+            var element = createElement4.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1626,7 +1626,7 @@
           exports.useCallback = useCallback;
           exports.useContext = useContext;
           exports.useDebugValue = useDebugValue;
-          exports.useEffect = useEffect2;
+          exports.useEffect = useEffect3;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useLayoutEffect = useLayoutEffect;
           exports.useMemo = useMemo;
@@ -2440,11 +2440,11 @@
       if (true) {
         (function() {
           "use strict";
-          var React3 = require_react();
+          var React4 = require_react();
           var _assign = require_object_assign();
           var Scheduler = require_scheduler();
           var tracing = require_tracing();
-          var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React4.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function warn(format) {
             {
               for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2476,7 +2476,7 @@
               Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
           }
-          if (!React3) {
+          if (!React4) {
             {
               throw Error("ReactDOM was loaded before React. Make sure you load the React package before loading ReactDOM.");
             }
@@ -2488,7 +2488,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment2 = 7;
+          var Fragment3 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -3692,7 +3692,7 @@
           var didWarnInvalidChild = false;
           function flattenChildren(children) {
             var content = "";
-            React3.Children.forEach(children, function(child) {
+            React4.Children.forEach(children, function(child) {
               if (child == null) {
                 return;
               }
@@ -3703,7 +3703,7 @@
           function validateProps(element, props) {
             {
               if (typeof props.children === "object" && props.children !== null) {
-                React3.Children.forEach(props.children, function(child) {
+                React4.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -8457,7 +8457,7 @@
               }
             }
           }
-          function createElement3(type, props, rootContainerElement, parentNamespace) {
+          function createElement4(type, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -9334,7 +9334,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement3(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement4(type, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -10896,7 +10896,7 @@
           }
           var fakeInternalInstance = {};
           var isArray = Array.isArray;
-          var emptyRefsObject = new React3.Component().refs;
+          var emptyRefsObject = new React4.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -11672,7 +11672,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment2) {
+              if (current2 === null || current2.tag !== Fragment3) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -12040,7 +12040,7 @@
               while (child !== null) {
                 if (child.key === key) {
                   switch (child.tag) {
-                    case Fragment2: {
+                    case Fragment3: {
                       if (element.type === REACT_FRAGMENT_TYPE) {
                         deleteRemainingChildren(returnFiber, child.sibling);
                         var existing = useFiber(child, element.props.children);
@@ -15644,7 +15644,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment2:
+              case Fragment3:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -15811,7 +15811,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment2:
+              case Fragment3:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -19515,7 +19515,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment2, elements, key, mode);
+            var fiber = createFiber(Fragment3, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -20420,11 +20420,11 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   });
 
   // index.tsx
-  var React2 = __toESM(require_react());
+  var React3 = __toESM(require_react());
   var ReactDOM = __toESM(require_react_dom());
 
   // components/app.tsx
-  var React = __toESM(require_react());
+  var React2 = __toESM(require_react());
 
   // hooks/use_config.ts
   var import_react = __toESM(require_react());
@@ -20449,17 +20449,37 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     return { config, configError };
   };
 
-  // components/app.tsx
-  var AppComponent = () => {
-    const { config, configError } = useConfig();
-    if (!config) {
-      return /* @__PURE__ */ React.createElement("div", {
-        className: "centered"
-      }, "Loading configuration");
-    }
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, configError && /* @__PURE__ */ React.createElement("div", {
-      className: "error"
-    }, configError), /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Host"), /* @__PURE__ */ React.createElement("th", null, "Proxy To"))), /* @__PURE__ */ React.createElement("tbody", null, config.hosts.entries.map((e, index) => /* @__PURE__ */ React.createElement("tr", {
+  // hooks/use_live_admin.ts
+  var import_react2 = __toESM(require_react());
+  var useLiveAdmin = () => {
+    (0, import_react2.useEffect)(() => {
+      if (window.localStorage.getItem("__live_admin")) {
+        console.info("Listening for live admin updates...");
+        const source = new EventSource("/__live_admin");
+        source.addEventListener("message", (e) => {
+          if (/\.css$/.test(e.data)) {
+            console.info("Reloading css...");
+            const queryString = `?reload=${new Date().getTime()}`;
+            document.querySelectorAll("head > link").forEach((link) => {
+              const href = link.getAttribute("href");
+              if (href) {
+                const newHref = href == null ? void 0 : href.replace(/\?.*|$/, queryString);
+                link.setAttribute("href", newHref);
+              }
+            });
+          } else {
+            window.location.reload();
+          }
+        });
+        return () => source.close();
+      }
+    }, []);
+  };
+
+  // components/dashboard.tsx
+  var React = __toESM(require_react());
+  var DashboardComponent = ({ config }) => {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Host"), /* @__PURE__ */ React.createElement("th", null, "Proxy To"))), /* @__PURE__ */ React.createElement("tbody", null, config.hosts.entries.map((e, index) => /* @__PURE__ */ React.createElement("tr", {
       key: `${e.host}-${e.lineNumber}-${index}`
     }, /* @__PURE__ */ React.createElement("td", null, e.proxied ? /* @__PURE__ */ React.createElement("a", {
       href: `http://${e.host}`
@@ -20467,10 +20487,27 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       href: `http://${e.proxyIp}:${e.proxyPort}`
     }, `${e.proxyIp}:${e.proxyPort}`) : "\u2717"))))));
   };
+  var dashboard_default = DashboardComponent;
+
+  // components/app.tsx
+  var AppComponent = () => {
+    useLiveAdmin();
+    const { config, configError } = useConfig();
+    if (!config) {
+      return /* @__PURE__ */ React2.createElement("div", {
+        className: "centered"
+      }, "Loading configuration");
+    }
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, configError && /* @__PURE__ */ React2.createElement("div", {
+      className: "error"
+    }, configError), /* @__PURE__ */ React2.createElement(dashboard_default, {
+      config
+    }));
+  };
   var app_default = AppComponent;
 
   // index.tsx
-  ReactDOM.render(/* @__PURE__ */ React2.createElement(app_default, null), document.getElementById("app"));
+  ReactDOM.render(/* @__PURE__ */ React3.createElement(app_default, null), document.getElementById("app"));
 })();
 /*
 object-assign
