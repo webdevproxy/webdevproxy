@@ -3,3 +3,6 @@ ignored-files/
 
 # in case main is built
 main
+
+# admin node_modules
+admin/node_modules

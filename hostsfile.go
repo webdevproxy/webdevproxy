@@ -11,30 +11,31 @@ import (
 )
 
 type HostsFileEntry struct {
-	LineNumber    int
-	Ip            string
-	Hostname      string
-	Proxied       bool
-	ProxyPort     int
-	ProxyHost     string
-	ProxyHostname string
+	LineNumber  int    `json:"lineNumber"`
+	LineContent string `json:"lineContent"`
+	Ip          string `json:"ip"`
+	Host        string `json:"host"`
+	Proxied     bool   `json:"proxied"`
+	ProxyIp     string `json:"proxyIp"`
+	ProxyPort   int    `json:"proxyPort"`
+	ProxyHost   string `json:"proxyHost"`
 }
 
 type HostsFileSyntaxError struct {
-	LineNumber  int
-	Line        string
-	SyntaxError string
+	LineNumber  int    `json:"lineNumber"`
+	LineContent string `json:"lineContent"`
+	SyntaxError string `json:"syntaxError"`
 }
 
 type Hostsfile struct {
-	Path         string
-	Contents     string
-	Entries      []HostsFileEntry
-	SyntaxErrors []HostsFileSyntaxError
+	Path         string                 `json:"path"`
+	Contents     string                 `json:"contents"`
+	Entries      []HostsFileEntry       `json:"entries"`
+	SyntaxErrors []HostsFileSyntaxError `json:"syntaxErrors"`
 }
 
 func (h *HostsFileEntry) proxyUrl() *url.URL {
-	url, _ := url.Parse(fmt.Sprintf("http://%s:%d/", h.ProxyHost, h.ProxyPort))
+	url, _ := url.Parse(fmt.Sprintf("http://%s:%d/", h.ProxyIp, h.ProxyPort))
 	return url
 }
 
@@ -56,25 +57,27 @@ func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) 
 	proxyComment := regexp.MustCompile("^\\s*webdevproxy(.*)$")
 
 	lines := strings.Split(strings.Trim(string(contents), " \t\r\n"), "\n")
-	for lineIndex, line := range lines {
+	for lineIndex, lineContent := range lines {
 		lineNumber := lineIndex + 1
 
 		// trim and skip empty lines or lines just with comments
-		line = strings.Replace(strings.Trim(line, " \t"), "\t", " ", -1)
-		if len(line) == 0 || line[0] == '#' {
+		trimmedLine := strings.Replace(strings.Trim(lineContent, " \t"), "\t", " ", -1)
+		if len(trimmedLine) == 0 || trimmedLine[0] == '#' {
 			continue
 		}
 
-		lineParts := strings.SplitN(line, " ", 2)
+		lineParts := strings.SplitN(trimmedLine, " ", 2)
 		if len(lineParts) > 1 && len(lineParts[0]) > 0 {
 			lineEntries := make([]HostsFileEntry, 0)
 
-			// parse the text before any comment in form (ip hostname*)
+			// parse the text before any comment in form (ip host*)
 			ip := lineParts[0]
 			valueParts := strings.SplitN(lineParts[1], "#", 2)
-			if hostnames := strings.Fields(valueParts[0]); len(hostnames) > 0 {
-				for _, hostname := range hostnames {
-					lineEntries = append(lineEntries, HostsFileEntry{LineNumber: lineNumber, Ip: ip, Hostname: hostname})
+			if hosts := strings.Fields(valueParts[0]); len(hosts) > 0 {
+				for _, host := range hosts {
+					if host != "localhost" {
+						lineEntries = append(lineEntries, HostsFileEntry{LineNumber: lineNumber, LineContent: lineContent, Ip: ip, Host: host})
+					}
 				}
 			}
 
@@ -82,8 +85,8 @@ func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) 
 			if len(valueParts) > 1 {
 				var proxied bool
 				var proxyPort int
-				var proxyHostname string
 				var proxyHost string
+				var proxyIp string
 
 				matches := proxyComment.FindAllStringSubmatch(valueParts[1], -1)
 				if len(matches) > 0 && len(matches[0]) > 1 {
@@ -92,27 +95,28 @@ func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) 
 							var err error
 							argParts := strings.SplitN(arg, ":", 2)
 							if len(argParts) > 1 {
-								name := argParts[0]
+								key := argParts[0]
+								value := argParts[1]
 								switch {
-								case name == "to":
-									proxyPort, proxyHost, err = ParseProxyPort(argParts[1])
+								case key == "to":
+									proxyPort, proxyIp, err = ParseProxyPort(value)
 									if err != nil {
 										syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
 											LineNumber:  lineNumber,
-											Line:        line,
+											LineContent: lineContent,
 											SyntaxError: err.Error(),
 										})
 									} else {
 										proxied = true
 									}
 
-								case name == "host":
-									proxyHostname = argParts[1]
+								case key == "host":
+									proxyHost = value
 
 								default:
 									syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
 										LineNumber:  lineNumber,
-										Line:        line,
+										LineContent: lineContent,
 										SyntaxError: fmt.Sprintf("Unknown key:value in the webdevproxy comment: %s", arg),
 									})
 								}
@@ -121,32 +125,24 @@ func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) 
 					}
 
 					if proxied {
-						if proxyHost == "" {
-							proxyHost = ip
+						if proxyIp == "" {
+							proxyIp = ip
 						}
 						for i := 0; i < len(lineEntries); i++ {
 							lineEntry := &lineEntries[i]
-							if lineEntry.Hostname == "localhost" {
-								syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
-									LineNumber:  lineNumber,
-									Line:        line,
-									SyntaxError: "A webdevproxy comment is not allowed for localhost",
-								})
-							} else {
-								lineEntry.Proxied = true
-								lineEntry.ProxyPort = proxyPort
+							lineEntry.Proxied = true
+							lineEntry.ProxyPort = proxyPort
+							lineEntry.ProxyIp = proxyIp
+							if proxyHost != "" {
 								lineEntry.ProxyHost = proxyHost
-								if proxyHostname != "" {
-									lineEntry.ProxyHostname = proxyHostname
-								} else {
-									lineEntry.ProxyHostname = lineEntry.Hostname
-								}
+							} else {
+								lineEntry.ProxyHost = lineEntry.Host
 							}
 						}
 					} else {
 						syntaxErrors = append(syntaxErrors, HostsFileSyntaxError{
 							LineNumber:  lineNumber,
-							Line:        line,
+							LineContent: lineContent,
 							SyntaxError: "No port value given, use to:PORT in webdevproxy comment",
 						})
 
@@ -162,21 +158,20 @@ func ParseHostsFile(contents []byte) ([]HostsFileEntry, []HostsFileSyntaxError) 
 	return entries, syntaxErrors
 }
 
-// parse to:PORT or to:HOST:PORT
 func ParseProxyPort(value string) (int, string, error) {
 	portParts := strings.SplitN(value, ":", 2)
 	if len(portParts) > 2 {
-		return 0, "", errors.New("The to: value must either be PORT or HOST:PORT")
+		return 0, "", errors.New("The to: value must either be PORT or IP:PORT")
 	}
 
+	var ip string
 	var port string
-	var host string
 
 	if len(portParts) == 1 {
 		port = portParts[0]
 	}
 	if len(portParts) == 2 {
-		host = portParts[0]
+		ip = portParts[0]
 		port = portParts[1]
 	}
 
@@ -188,5 +183,5 @@ func ParseProxyPort(value string) (int, string, error) {
 		return 0, "", errors.New(fmt.Sprintf("Invalid to: port value, must be >= 1: %s", port))
 	}
 
-	return portValue, host, nil
+	return portValue, ip, nil
 }

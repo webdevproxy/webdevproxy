@@ -1,0 +1,22 @@
+{
+  "name": "webdevproxy-admin",
+  "version": "0.0.1",
+  "description": "Local admin application for WebDevProxy",
+  "main": "index.js",
+  "scripts": {
+    "dev": "esbuild index.tsx --bundle --outdir=../assets/admin",
+    "dev:watch": "esbuild index.tsx --bundle --watch --outdir=../assets/admin"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "esbuild": "^0.14.11",
+    "typescript": "^4.5.4"
+  }
+}
